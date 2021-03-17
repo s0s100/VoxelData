@@ -14,7 +14,7 @@ import javafx.scene.image.WritableImage;
 
 public class ImageCollection {
 	private static final Color boneColor = new Color(1d, 1d, 1d, 0.8d); // Color of the bone element
-	public static final int SKIP_OPACITY_SCALE = 1; // Max skin opacity value
+	public static final int SKIP_OPACITY_SCALE = 101; // Max skin opacity value
 
 	private final ArrayList<WritableImage> images; // Set of generated images
 

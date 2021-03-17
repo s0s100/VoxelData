@@ -11,29 +11,28 @@ import javafx.scene.paint.Color;
  */
 
 public class GradientRenderer {
-	private static final int IMAGE_SIDE_LENGTH = 492;
-	
+	private static final int IMAGE_SIDE_LENGTH = 256;
+
 	// Boundaries of the light
 	public static final int MIN_LIGHT_X = -IMAGE_SIDE_LENGTH / 2;
 	public static final int MAX_LIGHT_X = IMAGE_SIDE_LENGTH / 2;
-	private static final int Z_LIGHT_DISTANCE = IMAGE_SIDE_LENGTH / 2; // Distance from the light to the skull center
-	private static final int Y_LIGHT_DISTANCE = -IMAGE_SIDE_LENGTH / 2; // Distance from the light to the skull center
+	private static final int Z_LIGHT_DISTANCE = -IMAGE_SIDE_LENGTH / 2; // Distance from the light to the skull center
+	private static final int Y_LIGHT_DISTANCE = IMAGE_SIDE_LENGTH / 2; // Distance from the light to the skull center
 	private static final double AMBIENT_COEFFICIET = 0.2d;
-	private static final double DIFFUSE_COEFFICIET = 1d;
+	private static final double DIFFUSE_COEFFICIET = 0.5d;
 	private static final double SPECULAR_COEFFICIET = 1d;
-	private static final int SHININGNESS_COEFFICIET = 5;
+	private static final int SHININGNESS_COEFFICIET = 10;
 
 	// Bone color
 	private static final Color BONE_COLOR = Color.WHITE;
 	private static final Color AMBIENT_COLOR = Color.WHITESMOKE;
 
 	// Bone boundary
-	private static final int MIN_BONE_BOUNDARY = 400;
+	private static final int MIN_BONE_BOUNDARY = 300;
 	private static final int MAX_BONE_BOUNDARY = 1000;
 
 	// Length of every side of the image
 	//private static final int IMAGE_SIDE_LENGTH = 256;
-
 
 	// Skull center coordinates
 	private static final int X_CENTER = IMAGE_SIDE_LENGTH / 2;
@@ -79,8 +78,8 @@ public class GradientRenderer {
 
 		//  Generate data set to work with image and doubles values at Z axis
 		// generateUnrotatedData();
-		//generateUnrotatedDataDoubledZ();
-		generateNewUnrotatedData();
+		generateUnrotatedDataDoubledZ();
+		// generateNewUnrotatedData();
 		rotatedData = unrotatedData;
 	}
 
@@ -492,9 +491,9 @@ public class GradientRenderer {
 						newZ = transpMatrix[3][2] + Z_CENTER;
 
 						// Interpolation implementation for voxels to set their values correctly
-						//interpVoxelSetter(newX, newY, newZ, element);
-						addToRotatedVoxel((int) newX, (int) newY, (int) newZ, element);
-						
+						interpVoxelSetter(newX, newY, newZ, element);
+						// addToRotatedVoxel((int) newX, (int) newY, (int) newZ, element);
+
 					}
 				}
 			}
@@ -541,8 +540,8 @@ public class GradientRenderer {
 
 					// Generate and calculate vector
 					calcVector = new Vector(resX, resY, resZ);
-					calcVector = calcVector.getNormalizedVector();
-					//addToRotatedVoxel(x + i, y + j, z + k, (int) (element * calcVector.getLength()));
+					//calcVector = calcVector.getNormalizedVector();
+					addToRotatedVoxel(x + i, y + j, z + k, (int) (element * calcVector.getLength()));
 				}
 			}
 		}

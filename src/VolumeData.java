@@ -14,13 +14,14 @@ import java.io.IOException;
 
 public class VolumeData {
 	// Skull default size of the image
-	//public static final int CT_X_AXIS = 256;// X axis length
-	//public static final int CT_Y_AXIS = 256;// Y axis length
-	//public static final int CT_Z_AXIS = 113;// Z axis length
+	public static final int CT_X_AXIS = 256;// X axis length
+	public static final int CT_Y_AXIS = 256;// Y axis length
+	public static final int CT_Z_AXIS = 113;// Z axis length
 
-	public static final int CT_X_AXIS = 492;// X axis length
-	public static final int CT_Y_AXIS = 492;// Y axis length
-	public static final int CT_Z_AXIS = 442;// Z axis length
+	// For new data
+	//public static int CT_X_AXIS = 492;// X axis length
+	//public static int CT_Y_AXIS = 492;// Y axis length
+	//public static int CT_Z_AXIS = 442;// Z axis length
 
 	private short cthead[][][]; // 3D volume data set
 	private short min, max; // min, max value in the 3D volume data set
@@ -97,7 +98,7 @@ public class VolumeData {
 		try {
 			file = new File(path);
 			in = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
-			readInfoSet(in);
+			readInfoSet2(in);
 			in.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -111,11 +112,14 @@ public class VolumeData {
 		sizeY = (short) ((in.readByte()) & 0xff);
 		sizeZ = (short) ((in.readByte()) & 0xff);
 		// Haven't used them :|
+		/*CT_X_AXIS = sizeX;
+		CT_Y_AXIS = sizeY;
+		CT_Z_AXIS = sizeZ;*/
 
 		for (int k = 0; k < CT_Z_AXIS; k++) {
 			for (int j = 0; j < CT_Y_AXIS; j++) {
 				for (int i = 0; i < CT_X_AXIS; i++) {
-					short nextElement = readInfoByte(in);
+					short nextElement = readInfoByte2(in);
 					cthead[i][j][k] = nextElement;
 				}
 			}
@@ -126,7 +130,7 @@ public class VolumeData {
 
 	// Reads 1 element of the data
 	private short readInfoByte2(DataInputStream in) throws IOException {
-		short bytePos1, bytePos2, bytePos3;
+		short bytePos1;
 		short result = 0;
 
 		/*

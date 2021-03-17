@@ -34,15 +34,15 @@ public class MainWindow extends Application {
 	public void start(Stage stage) throws Exception {
 
 		// Dialog via console
-		System.out.print("Select file path:");
+		// System.out.print("Select file path:");
 		// Scanner in = new Scanner(System.in);
 		// String path = in.next();
 		// in.close();
 
 		// Set default path
 		System.out.println();
-		//String defaultPath = "volume data/CThead";
-		String defaultPath = "volume data/extra/present492x492x442.dat";
+		String defaultPath = "volume data/CThead";
+		//String defaultPath = "volume data/extra/present492x492x442.dat";
 
 		// Read data
 		VolumeData volumeData = new VolumeData();
@@ -57,7 +57,7 @@ public class MainWindow extends Application {
 		 */
 
 		// X axis
-/*
+
 		ImageCollection xQ1ImageCollection = new ImageCollection(SliceWay.X_AXIS, SliceType.NormalSlice, volumeData);
 		ImageView xImageView = new ImageView(xQ1ImageCollection.getImages().get(0));
 		Slider xSlider = new Slider(0, VolumeData.CT_X_AXIS - 1, 0);
@@ -126,7 +126,7 @@ public class MainWindow extends Application {
 		/*
 		 * Q2 elements
 		 */
-/*
+
 		// Volume render slider and rendered image collections
 		ImageCollection xQ2ImageCollection = new ImageCollection(SliceWay.X_AXIS, SliceType.VolumeRender, volumeData);
 		ImageCollection yQ2ImageCollection = new ImageCollection(SliceWay.Y_AXIS, SliceType.VolumeRender, volumeData);
@@ -201,7 +201,7 @@ public class MainWindow extends Application {
 		/**
 		 * Q3 elements
 		 */
-		
+
 		ColorPicker colorPicker = new ColorPicker(); // Allows to pick a color of the light
 		Slider lSlider = new Slider(GradientRenderer.MIN_LIGHT_X, GradientRenderer.MAX_LIGHT_X, 0); // Slider to change the angle of the light
 		GradientRenderer gradientRenderer = new GradientRenderer(volumeData, (int) lSlider.getValue(),
@@ -308,9 +308,9 @@ public class MainWindow extends Application {
 
 		Pane root = new Pane();
 		root.getChildren().addAll(xSliderText, ySliderText, zSliderText, vSliderText, lSliderText, q3Text); // Text info
-		//root.getChildren().addAll(xImageView, yImageView, zImageView, xSlider, ySlider, zSlider); // Q1 elements
-		//root.getChildren().addAll(q1State, q2State, vSlider); // Q2 elements
-		root.getChildren().addAll(gImageView, lSlider, colorPicker); // Q2 elements
+		root.getChildren().addAll(xImageView, yImageView, zImageView, xSlider, ySlider, zSlider); // Q1 elements
+		root.getChildren().addAll(q1State, q2State, vSlider); // Q2 elements
+		root.getChildren().addAll(gImageView, lSlider, colorPicker); // Q3 elements
 
 		Scene scene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT);
 		stage.setTitle("Main screen");
